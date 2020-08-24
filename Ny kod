@@ -1,0 +1,97 @@
+using System;
+
+namespace Kul
+{
+    class MainClass
+    {
+        public static void Main(string[] args)
+        {
+            double num1 = 0;
+            double num2 = 0;
+            bool quit = false;
+            bool quitW = false;
+            bool function = false;
+
+            while (quit == false)
+
+            {
+                //För att resetta alla Booleans.
+                quit = false;
+                quitW = false;
+                function = false;
+
+                // Första talet
+                Console.WriteLine("Please enter a number: ");
+                while (!double.TryParse(Console.ReadLine(), out num1))
+                {
+                    Console.Write("This is not valid input. Please enter an integer value: \n");
+                }
+                // Andra talet
+                Console.WriteLine("Please enter another number: ");
+                while (!double.TryParse(Console.ReadLine(), out num2))
+                {
+                    Console.Write("This is not valid input. Please enter an integer value: \n");
+                }
+                //Valet av funktion
+                Console.WriteLine("Please choose what function you want. \nAdd - a\nSubtract - s\nMultiply - m\nExponant - e\nDivide - d");
+                Console.Write("Please choose your option:\n");
+                while (function == false) {
+                    switch (Console.ReadLine())
+                    {
+                        case "a":
+                            Console.WriteLine($"{num1} + {num2} = " + (num1 + num2));
+                            function = true;
+                            break;
+
+                        case "s":
+                            Console.WriteLine($"{num1} - {num2} = " + (num1 - num2));
+                            function = true;
+                            break;
+                        case "m":
+                            Console.WriteLine($"{num1} * {num2} = " + (num1 * num2));
+                            function = true;
+                            break;
+                        case "e":
+                            Console.WriteLine($"{num1} ^ {num2} = " + Math.Pow(num1, num2));
+                            function = true;
+                            break;
+                        case "d":
+                            while (num2 == 0)
+                            {
+                                Console.WriteLine("It's no possible to divide by zero, please choose another number: ");
+                                function = false;
+                                num2 = Convert.ToDouble(Console.ReadLine());
+                            }
+                            Console.WriteLine($"{num1} / {num2} = " + (num1 / num2));
+                            function = true;
+                            break;
+                        default:
+                            Console.WriteLine("Please choose one alterantive from above, note that it's case sensitive.");
+                            function = false;
+                            break;
+                    }
+                }
+                //Ger användaren möjlighet att göra en ny uträkning, alternativt att avsluta programmet.
+                while (quitW == false)
+                {
+                    Console.WriteLine("Do you want to do another calculation? y/n");
+                    switch (Console.ReadLine())
+                    {
+                        case "y":
+                            quitW = true;
+                            break;
+
+                        case "n":
+                            quitW = true;
+                            quit = true;
+                            break;
+                        default:
+                            Console.WriteLine("Please choose one alterantive from above, note that it's case sensitive.");
+                            quitW = false;
+                            break;
+                    }
+                }
+            }
+        }
+    }
+}
